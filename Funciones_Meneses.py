@@ -181,3 +181,56 @@ def jugar(secreto):
             cont_intentos+=1
 
 jugar(palabra_secreta)
+
+# Ahorcado 2:
+
+def crearJuego():
+    escribir=True
+    error=bool
+
+    while escribir:
+        palabra_secreta=str.lower(input("Ingrese la palabra para ser adivinada: "))
+        
+        for l in palabra_secreta:
+            if not "a" <= l and l <= "z":
+                print("Ingrese sólo letras en la palabra ha ser adivinada.\nIntente otra vez.")
+                error=True
+                break
+            else:
+                error=False
+        
+        if not error:
+            escribir=False
+                
+    return palabra_secreta
+
+def jugar(secreto):
+    pista = ["-"]*len(secreto)
+    intentos_ahorcado=6
+    cont_intentos=0
+    
+    while cont_intentos < intentos_ahorcado:    
+        letra=str.lower(input("¿Qué letra hay en la palabra?: "))
+    
+        if letra in secreto and len(letra)==1:
+            for i, l in enumerate(secreto):
+                if l == letra: #enumerate(secreto) = {0:"H", 1:"O", 2:"L", 3:"A", 4:"A", 5:"A"}
+                    pista[i] = l
+                    print(pista)
+                    if not "-" in pista:
+                        print("¡Ganaste!")
+                        exit()
+        else:
+            print(f"La letra no está en la palabra.\nTe quedan {intentos_ahorcado-cont_intentos-1} intentos")
+            cont_intentos+=1
+
+
+jugar(crearJuego())
+
+
+
+
+
+# import platform
+# sistema = platform.system()
+# format(sistema)
